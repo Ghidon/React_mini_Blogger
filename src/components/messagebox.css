@@ -32,13 +32,9 @@ textarea {
 }
 
 .messageBoxButton {
-  width: 68px;
-  height: 34px;
-  background: #007bff;
-  border-radius: 4px;
   float: right;
-  border: none;
-  color: white;
-  font-size: 16px;
-  line-height: 19px;
+}
+
+.disabled {
+  opacity: 65;
 }

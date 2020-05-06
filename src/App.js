@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import MessageBox from "./components/messagebox";
+import Tweets from "./components/tweets";
 
 class Blogger extends React.Component {
   constructor(props) {
@@ -13,7 +14,6 @@ class Blogger extends React.Component {
   }
 
   updateState = (text) => {
-    console.log("receiving text", text);
     let { tweets } = this.state;
     tweets.push(text);
     this.setState({
@@ -22,7 +22,6 @@ class Blogger extends React.Component {
   };
 
   render() {
-    console.log(this.state.tweets);
     const { text } = this.state;
     return (
       <div className="mainApp">
