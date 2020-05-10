@@ -39,6 +39,9 @@ class Blogger extends React.Component {
   showErrorMessage(data, status) {
     this.setState({ error: true, dataError: data, statusError: status });
   }
+  hideErrorMessage() {
+    this.setState({ error: false, dataError: "", statusError: "" });
+  }
 
   updateState = (wholeTweet) => {
     let { tweets } = this.state;
@@ -47,7 +50,11 @@ class Blogger extends React.Component {
       tweets: tweets,
     });
     let postingTweet = { tweet: wholeTweet };
-    postTweet(postingTweet, this.showErrorMessage.bind(this));
+    postTweet(
+      postingTweet,
+      this.showErrorMessage.bind(this),
+      this.hideErrorMessage.bind(this)
+    );
   };
 
   render() {
