@@ -23,10 +23,14 @@ class MessageBox extends React.Component {
   };
 
   submitToParent = () => {
+    let tweet = {
+      content: this.state.textValue,
+      userName: "Yoda",
+      date: new Date().toISOString(),
+    };
     let { callbackFC } = this.props;
-    callbackFC(this.state.textValue);
+    callbackFC(tweet);
     this.setState({ textValue: "" });
-    this.setState({ buttonOff: false });
   };
 
   render() {
@@ -64,30 +68,20 @@ class MessageBox extends React.Component {
               name="messagebox"
               id="message-box"
               cols="75"
-              rows="6"
+              rows="5"
               maxLength="140"
               placeholder="What is in your mind..."
             ></textarea>
+            <span
+              className="error-message"
+              style={{
+                visibility:
+                  this.state.buttonOff === true ? "visible" : "hidden",
+              }}
+            >
+              Can't allow more than 140 characters
+            </span>
             {button}
-            {/*             
-            {
-              <button
-                className="messageBoxButton"
-                disabled
-                onClick={this.submitToParent}
-              >
-                Tweet
-              </button>
-            }
-            else
-            {
-              <button
-                className="messageBoxButton"
-                onClick={this.submitToParent}
-              >
-                Tweet
-              </button>
-            } */}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@
   margin-top: 5px;
   background-color: #15202b;
   height: 180px;
+  padding-top: 10px;
 }
 
 .inputBox {
@@ -37,4 +38,8 @@ textarea {
 
 .disabled {
   opacity: 65;
+}
+
+.error-message {
+  color: tomato;
 }
