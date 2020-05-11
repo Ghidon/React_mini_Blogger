@@ -23,9 +23,10 @@ class MessageBox extends React.Component {
   };
 
   submitToParent = () => {
+    let { userName } = this.props;
     let tweet = {
       content: this.state.textValue,
-      userName: "Yoda",
+      userName: userName,
       date: new Date().toISOString(),
     };
     let { callbackFC } = this.props;
@@ -79,7 +80,7 @@ class MessageBox extends React.Component {
                   this.state.buttonOff === true ? "visible" : "hidden",
               }}
             >
-              Can't allow more than 140 characters
+              The Tweet can't contain more than 140 chars.
             </span>
             {button}
           </div>

@@ -52,3 +52,14 @@
 .errorMessage {
   color: tomato;
 }
+
+.container {
+  background: #343a40;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  height: 58px;
+  align-items: center;
+  color: white;
+  margin-bottom: 40px;
+}

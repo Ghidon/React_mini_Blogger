@@ -1,0 +1,36 @@
+.profile {
+  color: white;
+  text-align: left;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.inputProfile {
+  width: 100%;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 6px;
+  height: 61px;
+  padding: 16px;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: #15202b;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.messageBoxButton {
+  margin-right: 10px;
+  width: 68px;
+}
