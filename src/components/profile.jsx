@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./profile.css";
+import BloggerContext from "../Context/BloggerContext";
 
 const Profile = (props) => {
   const [userName, setUserName] = useState("");
-
+  const context = useContext(BloggerContext);
   const handleOnUserNameChange = (event) => {
     setUserName(event.target.value);
   };
 
   const submitUserNameToParent = () => {
-    let { callUserName } = props;
+    let { callUserName } = context;
     callUserName(userName);
   };
 

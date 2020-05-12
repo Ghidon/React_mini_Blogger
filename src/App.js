@@ -1,4 +1,5 @@
 import React from "react";
+import BloggerContext from "./Context/BloggerContext";
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +30,13 @@ class Blogger extends React.Component {
 
   componentDidMount() {
     this.fetchTweets().then();
+    this.interval = setInterval(() => {
+      this.fetchTweets();
+    }, 10000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   async fetchTweets() {
@@ -52,7 +60,6 @@ class Blogger extends React.Component {
     this.setState({ error: false, dataError: "", statusError: "" });
   }
   setUserName(userName) {
-    console.log(userName);
     this.setState({ userName: userName });
   }
 
@@ -71,14 +78,7 @@ class Blogger extends React.Component {
   };
 
   render() {
-    const {
-      loading,
-      tweets,
-      error,
-      dataError,
-      statusError,
-      userName,
-    } = this.state;
+    const { loading, tweets, error, dataError, statusError } = this.state;
 
     return (
       <Router>
@@ -116,24 +116,32 @@ class Blogger extends React.Component {
               </div>
             </div>
           </div>
-          <Switch>
-            <Route path="/home">
-              {error && (
-                <h5 className="errorMessage">
-                  Error {statusError}, {dataError}
-                </h5>
-              )}
-              <MessageBox callbackFC={this.updateState} userName={userName} />
-              {loading && <h5 className="loadingMessage">Loading...</h5>}
+          <BloggerContext.Provider
+            value={{
+              userName: this.state.userName,
+              callbackFC: this.updateState,
+              callUserName: this.setUserName,
+            }}
+          >
+            <Switch>
+              <Route path="/home">
+                {error && (
+                  <h5 className="errorMessage">
+                    Error {statusError}, {dataError}
+                  </h5>
+                )}
+                <MessageBox />
+                {loading && <h5 className="loadingMessage">Loading...</h5>}
 
-              {tweets.map((element, index) => {
-                return <Tweets key={index} tweet={element} />;
-              })}
-            </Route>
-            <Route path="/profile">
-              <Profile callUserName={this.setUserName} />
-            </Route>
-          </Switch>
+                {tweets.map((element, index) => {
+                  return <Tweets key={index} tweet={element} />;
+                })}
+              </Route>
+              <Route path="/profile">
+                <Profile />
+              </Route>
+            </Switch>
+          </BloggerContext.Provider>
         </div>
       </Router>
     );

@@ -1,5 +1,6 @@
 import React from "react";
 import "./messagebox.css";
+import BloggerContext from "../Context/BloggerContext";
 
 class MessageBox extends React.Component {
   constructor(props) {
@@ -8,10 +9,11 @@ class MessageBox extends React.Component {
       textValue: "",
       buttonOff: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.submitToParent = this.submitToParent.bind(this);
   }
-
+  static contextType = BloggerContext;
   handleChange = (event) => {
     this.setState({ textValue: event.target.value });
     let length = event.target.value.length;
@@ -23,13 +25,13 @@ class MessageBox extends React.Component {
   };
 
   submitToParent = () => {
-    let { userName } = this.props;
+    let { userName } = this.context;
     let tweet = {
       content: this.state.textValue,
       userName: userName,
       date: new Date().toISOString(),
     };
-    let { callbackFC } = this.props;
+    let { callbackFC } = this.context;
     callbackFC(tweet);
     this.setState({ textValue: "" });
   };
