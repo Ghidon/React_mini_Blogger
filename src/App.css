@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.mainApp {
+  background-color: #15202b;
+  min-height: 100vh;
+  height: auto;
+  width: 100vw;
+  text-align: center;
+}
+
+.loadingMessage {
+  color: white;
+}
+
+.errorMessage {
+  color: tomato;
+}
+
+.container {
+  background: #343a40;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  height: 58px;
+  align-items: center;
+  color: white;
+  margin-bottom: 40px;
+}
