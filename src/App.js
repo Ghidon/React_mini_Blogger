@@ -12,6 +12,7 @@ import Tweets from "./components/tweets";
 import { postTweet } from "./lib/api";
 import { getTweet } from "./lib/api";
 import Profile from "./components/profile";
+import defaultDb from "./lib/init-firebase";
 
 class Blogger extends React.Component {
   constructor(props) {
@@ -28,11 +29,24 @@ class Blogger extends React.Component {
     this.setUserName = this.setUserName.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchTweets().then();
     this.interval = setInterval(() => {
       this.fetchTweets();
     }, 10000);
+
+    // const { defaultDb } = firebaseBlog;
+    defaultDb
+      .collection("tweets")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.id, "=>", doc.data());
+        });
+      })
+      .catch((err) => {
+        console.log("Error getting documents", err);
+      });
   }
 
   componentWillUnmount() {
